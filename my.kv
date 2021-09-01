@@ -1,0 +1,42 @@
+<FloatLayout>:
+
+    # pos_hint - x, top - starts at the bottom left then uses % of window size
+    # size_hint - uses % of window size.
+
+    # What we are doing here is binding kivy GUI elements to python variables
+    ip: ip_address
+
+    ActionBar:
+        pos_hint: {'top':1}
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+            ActionGroup:
+                text: 'Help'
+                ActionButton:
+                    id: help
+                    text: 'Help'
+                    on_release: root.help()
+                ActionButton:
+                    text: 'Exit'
+                    on_release: root.exit()
+
+    Label:
+        id: label_address
+        pos_hint: {"x":0.1, "top":0.7}
+        size_hint: 0.33, 0.15
+        text: 'Enter server address:'
+    TextInput:
+        id: ip_address
+        pos_hint: {"x":0.6, "top":0.7}
+        size_hint: 0.33, 0.15
+        multiline: False
+        text: ''
+        on_text: root.connect_to_server('','')
+    Label:
+        id: connection_status
+        pos_hint: {"x":0.1, "top":0.6}
+        size_hint: 0.8,0.4
+        multiline: True
+        text: root.status_text
+        text_size: self.size
